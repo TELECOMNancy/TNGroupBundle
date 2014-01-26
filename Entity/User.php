@@ -3,6 +3,7 @@
 namespace Videl\TNGroupBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * User
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Videl\TNGroupBundle\Entity\UserRepository")
  */
-class User
+class User //implements UserInterface, \Serializable
 {
     /**
      * @var integer
@@ -43,9 +44,14 @@ class User
     private $lastName;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Group", mappedBy="members")
+     * @ORM\ManyToMany(targetEntity="TNGroup", mappedBy="members")
      */
     private $groups;
+
+    /**
+     * @var boolean
+     */
+    private $isActive;
 
 
     /**
@@ -132,15 +138,16 @@ class User
     public function __construct()
     {
         $this->groups = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->isActive = true;
     }
 
     /**
      * Add groups
      *
-     * @param \Videl\TNGroupBundle\Entity\Group $groups
+     * @param \Videl\TNGroupBundle\Entity\TNGroup $groups
      * @return User
      */
-    public function addGroup(\Videl\TNGroupBundle\Entity\Group $groups)
+    public function addGroup(\Videl\TNGroupBundle\Entity\TNGroup $groups)
     {
         $this->groups[] = $groups;
 
@@ -150,9 +157,9 @@ class User
     /**
      * Remove groups
      *
-     * @param \Videl\TNGroupBundle\Entity\Group $groups
+     * @param \Videl\TNGroupBundle\Entity\TNGroup $groups
      */
-    public function removeGroup(\Videl\TNGroupBundle\Entity\Group $groups)
+    public function removeGroup(\Videl\TNGroupBundle\Entity\TNGroup $groups)
     {
         $this->groups->removeElement($groups);
     }
@@ -165,5 +172,10 @@ class User
     public function getGroups()
     {
         return $this->groups;
+    }
+
+    public function __toString()
+    {
+        return $this->getEmail();
     }
 }

@@ -5,12 +5,12 @@ namespace Videl\TNGroupBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Group
+ * TNGroup
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Videl\TNGroupBundle\Entity\GroupRepository")
+ * @ORM\Entity(repositoryClass="Videl\TNGroupBundle\Entity\TNGroupRepository")
  */
-class Group
+class TNGroup
 {
     /**
      * @var integer
@@ -53,7 +53,7 @@ class Group
     private $rights;
 
     /**
-     * @ORM\OneToOne(targetEntity="Group")
+     * @ORM\OneToOne(targetEntity="TNGroup")
      */
     private $parent;
 
@@ -150,7 +150,7 @@ class Group
      * Add members
      *
      * @param \Videl\TNGroupBundle\Entity\User $members
-     * @return Group
+     * @return TNGroup
      */
     public function addMember(\Videl\TNGroupBundle\Entity\User $members)
     {
@@ -183,7 +183,7 @@ class Group
      * Add rights
      *
      * @param \Videl\TNGroupBundle\Entity\GroupRights $rights
-     * @return Group
+     * @return TNGroup
      */
     public function addRight(\Videl\TNGroupBundle\Entity\GroupRights $rights)
     {
@@ -215,10 +215,10 @@ class Group
     /**
      * Set parent
      *
-     * @param \Videl\TNGroupBundle\Entity\Group $parent
-     * @return Group
+     * @param \Videl\TNGroupBundle\Entity\TNGroup $parent
+     * @return TNGroup
      */
-    public function setParent(\Videl\TNGroupBundle\Entity\Group $parent = null)
+    public function setParent(\Videl\TNGroupBundle\Entity\TNGroup $parent = null)
     {
         $this->parent = $parent;
 
@@ -228,10 +228,15 @@ class Group
     /**
      * Get parent
      *
-     * @return \Videl\TNGroupBundle\Entity\Group 
+     * @return \Videl\TNGroupBundle\Entity\TNGroup 
      */
     public function getParent()
     {
         return $this->parent;
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
     }
 }

@@ -22,12 +22,12 @@ class GroupRights
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="Group")
+     * @ORM\OneToOne(targetEntity="TNGroup")
      */
     private $inheritedFrom;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Group", inversedBy="rights")
+     * @ORM\ManyToOne(targetEntity="TNGroup", inversedBy="rights")
      */
     private $group;
 
@@ -51,10 +51,10 @@ class GroupRights
     /**
      * Set inheritedFrom
      *
-     * @param \Videl\TNGroupBundle\Entity\Group $inheritedFrom
+     * @param \Videl\TNGroupBundle\Entity\TNGroup $inheritedFrom
      * @return GroupRights
      */
-    public function setInheritedFrom(\Videl\TNGroupBundle\Entity\Group $inheritedFrom = null)
+    public function setInheritedFrom(\Videl\TNGroupBundle\Entity\TNGroup $inheritedFrom = null)
     {
         $this->inheritedFrom = $inheritedFrom;
 
@@ -64,7 +64,7 @@ class GroupRights
     /**
      * Get inheritedFrom
      *
-     * @return \Videl\TNGroupBundle\Entity\Group 
+     * @return \Videl\TNGroupBundle\Entity\TNGroup 
      */
     public function getInheritedFrom()
     {
@@ -74,10 +74,10 @@ class GroupRights
     /**
      * Set group
      *
-     * @param \Videl\TNGroupBundle\Entity\Group $group
+     * @param \Videl\TNGroupBundle\Entity\TNGroup $group
      * @return GroupRights
      */
-    public function setGroup(\Videl\TNGroupBundle\Entity\Group $group = null)
+    public function setGroup(\Videl\TNGroupBundle\Entity\TNGroup $group = null)
     {
         $this->group = $group;
 
@@ -87,7 +87,7 @@ class GroupRights
     /**
      * Get group
      *
-     * @return \Videl\TNGroupBundle\Entity\Group 
+     * @return \Videl\TNGroupBundle\Entity\TNGroup 
      */
     public function getGroup()
     {

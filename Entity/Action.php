@@ -106,4 +106,9 @@ class Action
     {
         return $this->parameters;
     }
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
 }
