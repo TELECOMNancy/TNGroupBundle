@@ -52,8 +52,18 @@ class Group
      */
     private $rights;
 
+    /**
+     * @ORM\OneToOne(targetEntity="Group")
+     */
+    private $parent;
+
+    /**
+     * Constructor
+     */
     public function __construct()
     {
+        $this->members = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->rights = new \Doctrine\Common\Collections\ArrayCollection();
         $this->date = new \DateTime();
     }
 
@@ -135,14 +145,6 @@ class Group
     {
         return $this->date;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->members = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->rights = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Add members
@@ -208,5 +210,28 @@ class Group
     public function getRights()
     {
         return $this->rights;
+    }
+
+    /**
+     * Set parent
+     *
+     * @param \Videl\TNGroupBundle\Entity\Group $parent
+     * @return Group
+     */
+    public function setParent(\Videl\TNGroupBundle\Entity\Group $parent = null)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * Get parent
+     *
+     * @return \Videl\TNGroupBundle\Entity\Group 
+     */
+    public function getParent()
+    {
+        return $this->parent;
     }
 }
