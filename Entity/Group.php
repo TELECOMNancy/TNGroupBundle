@@ -42,6 +42,20 @@ class Group
      */
     private $date;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="groups")
+     */
+    private $members;
+
+    /**
+     * @ORM\OneToMany(targetEntity="GroupRights", mappedBy="group")
+     */
+    private $rights;
+
+    public function __construct()
+    {
+        $this->date = new \DateTime();
+    }
 
     /**
      * Get id
@@ -120,5 +134,79 @@ class Group
     public function getDate()
     {
         return $this->date;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->members = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->rights = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add members
+     *
+     * @param \Videl\TNGroupBundle\Entity\User $members
+     * @return Group
+     */
+    public function addMember(\Videl\TNGroupBundle\Entity\User $members)
+    {
+        $this->members[] = $members;
+
+        return $this;
+    }
+
+    /**
+     * Remove members
+     *
+     * @param \Videl\TNGroupBundle\Entity\User $members
+     */
+    public function removeMember(\Videl\TNGroupBundle\Entity\User $members)
+    {
+        $this->members->removeElement($members);
+    }
+
+    /**
+     * Get members
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMembers()
+    {
+        return $this->members;
+    }
+
+    /**
+     * Add rights
+     *
+     * @param \Videl\TNGroupBundle\Entity\GroupRights $rights
+     * @return Group
+     */
+    public function addRight(\Videl\TNGroupBundle\Entity\GroupRights $rights)
+    {
+        $this->rights[] = $rights;
+
+        return $this;
+    }
+
+    /**
+     * Remove rights
+     *
+     * @param \Videl\TNGroupBundle\Entity\GroupRights $rights
+     */
+    public function removeRight(\Videl\TNGroupBundle\Entity\GroupRights $rights)
+    {
+        $this->rights->removeElement($rights);
+    }
+
+    /**
+     * Get rights
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRights()
+    {
+        return $this->rights;
     }
 }

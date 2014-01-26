@@ -28,6 +28,11 @@ class Action
      */
     private $name;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Parameter", mappedBy="action")
+     */
+    private $parameters;
+
 
     /**
      * Get id
@@ -60,5 +65,45 @@ class Action
     public function getName()
     {
         return $this->name;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->parameters = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add parameters
+     *
+     * @param \Videl\TNGroupBundle\Entity\Parameter $parameters
+     * @return Action
+     */
+    public function addParameter(\Videl\TNGroupBundle\Entity\Parameter $parameters)
+    {
+        $this->parameters[] = $parameters;
+
+        return $this;
+    }
+
+    /**
+     * Remove parameters
+     *
+     * @param \Videl\TNGroupBundle\Entity\Parameter $parameters
+     */
+    public function removeParameter(\Videl\TNGroupBundle\Entity\Parameter $parameters)
+    {
+        $this->parameters->removeElement($parameters);
+    }
+
+    /**
+     * Get parameters
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getParameters()
+    {
+        return $this->parameters;
     }
 }

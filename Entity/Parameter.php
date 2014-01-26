@@ -42,6 +42,11 @@ class Parameter
      */
     private $value;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Action", inversedBy="parameters")
+     */
+    private $action;
+
 
     /**
      * Get id
@@ -120,5 +125,28 @@ class Parameter
     public function getValue()
     {
         return $this->value;
+    }
+
+    /**
+     * Set action
+     *
+     * @param \Videl\TNGroupBundle\Entity\Action $action
+     * @return Parameter
+     */
+    public function setAction(\Videl\TNGroupBundle\Entity\Action $action = null)
+    {
+        $this->action = $action;
+
+        return $this;
+    }
+
+    /**
+     * Get action
+     *
+     * @return \Videl\TNGroupBundle\Entity\Action 
+     */
+    public function getAction()
+    {
+        return $this->action;
     }
 }

@@ -42,6 +42,11 @@ class User
      */
     private $lastName;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Group", mappedBy="members")
+     */
+    private $groups;
+
 
     /**
      * Get id
@@ -120,5 +125,45 @@ class User
     public function getLastName()
     {
         return $this->lastName;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->groups = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add groups
+     *
+     * @param \Videl\TNGroupBundle\Entity\Group $groups
+     * @return User
+     */
+    public function addGroup(\Videl\TNGroupBundle\Entity\Group $groups)
+    {
+        $this->groups[] = $groups;
+
+        return $this;
+    }
+
+    /**
+     * Remove groups
+     *
+     * @param \Videl\TNGroupBundle\Entity\Group $groups
+     */
+    public function removeGroup(\Videl\TNGroupBundle\Entity\Group $groups)
+    {
+        $this->groups->removeElement($groups);
+    }
+
+    /**
+     * Get groups
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getGroups()
+    {
+        return $this->groups;
     }
 }
