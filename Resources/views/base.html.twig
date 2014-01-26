@@ -37,7 +37,7 @@
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>
-						<a class="navbar-brand" href="#">TELECOMNancy.net Admin Interface</a>
+						<a class="navbar-brand" href="{{ path('tn_group_homepage') }}">TELECOMNancy.net Admin Interface</a>
 					</div>
 					<div class="navbar-collapse collapse">
 						<ul class="nav navbar-nav">
@@ -45,7 +45,10 @@
 								<a href="#">Accueil</a>
 							</li>
 							<li>
-								<a href="#">Test</a>
+								<a href="{{ url('tngroup') }}">All groups</a>
+							</li>
+							<li>
+								<a href="{{ url('action') }}">All actions</a>
 							</li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
@@ -60,15 +63,19 @@
 
 		<div class="container">
 
-		{% block body %}
+		{% block completebody %}
 
-			<div class="jumbotron">
-				<section>
-					<header>
-						<h1>Bienvenue</h1>
-					</header>
-					<p>Vous êtes sur la page d'accueil.</p>
-				</section>				
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<section>
+						{% block body %}
+						<header>
+							<h1>Bienvenue</h1>
+						</header>
+						<p>Vous êtes sur la page d'accueil.</p>
+						{% endblock %}
+					</section>
+				</div>
 			</div>
 
 		{% endblock %}

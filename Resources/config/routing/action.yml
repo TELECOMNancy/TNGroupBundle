@@ -1,0 +1,30 @@
+action:
+    pattern:  /
+    defaults: { _controller: "TNGroupBundle:Action:index" }
+
+action_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "TNGroupBundle:Action:show" }
+
+action_new:
+    pattern:  /new
+    defaults: { _controller: "TNGroupBundle:Action:new" }
+
+action_create:
+    pattern:  /create
+    defaults: { _controller: "TNGroupBundle:Action:create" }
+    requirements: { _method: post }
+
+action_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "TNGroupBundle:Action:edit" }
+
+action_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "TNGroupBundle:Action:update" }
+    requirements: { _method: post|put }
+
+action_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "TNGroupBundle:Action:delete" }
+    requirements: { _method: post|delete }

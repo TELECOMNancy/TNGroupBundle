@@ -1,3 +1,23 @@
 tn_group_homepage:
     pattern:  /
     defaults: { _controller: TNGroupBundle:Default:index }
+
+TNGroupBundle_parameter:
+    resource: "@TNGroupBundle/Resources/config/routing/parameter.yml"
+    prefix:   /parameter
+
+TNGroupBundle_tngroup:
+    resource: "@TNGroupBundle/Resources/config/routing/tngroup.yml"
+    prefix:   /tngroup
+
+TNGroupBundle_action:
+    resource: "@TNGroupBundle/Resources/config/routing/action.yml"
+    prefix:   /action
+
+
+tnancy_login:
+    path:   /login
+    defaults:  { _controller: TNGroupBundle:Security:login }
+
+tnancy_login_check:
+    path:   /login_check
