@@ -1,2 +1,4 @@
 TNGroupBundle
 =============
+
+Manage groups.
