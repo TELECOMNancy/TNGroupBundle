@@ -52,9 +52,15 @@
 							</li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
+						{% if is_granted('ROLE_TNANCY') %}
+							<li>
+								<a href="{{ url('tnancy_logout') }}">{{ app.user.username }}</a>
+							</li>
+						{% else %}
 							<li>
 								<a href="#">Connexion</a>
 							</li>
+						{% endif %}
 						</ul>									
 					</div>
 				</div>

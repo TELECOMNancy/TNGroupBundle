@@ -11,7 +11,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Videl\TNGroupBundle\Entity\UserRepository")
  */
-class User //implements UserInterface, \Serializable
+class User implements UserInterface, \Serializable
 {
     /**
      * @var integer
@@ -47,12 +47,6 @@ class User //implements UserInterface, \Serializable
      * @ORM\ManyToMany(targetEntity="TNGroup", mappedBy="members")
      */
     private $groups;
-
-    /**
-     * @var boolean
-     */
-    private $isActive;
-
 
     /**
      * Get id
@@ -177,5 +171,57 @@ class User //implements UserInterface, \Serializable
     public function __toString()
     {
         return $this->getEmail();
+    }
+
+    /** UserInterface interface */
+
+    public function getRoles()
+    {
+        return array('ROLE_TNANCY');
+    }
+
+    public function getPassword()
+    {
+        return ' ';
+    }
+
+    public function getSalt()
+    {
+        return null;
+    }
+
+    public function getPrettyName()
+    {
+        return $this->getFirstName() . ' ' . $this->getLastName() . ' (' . $this->getEmail() . ')';
+    }
+
+    public function getUsername()
+    {
+        return $this->getEmail();
+    }
+
+    public function eraseCredentials()
+    {
+
+    }
+
+    /** Serializable interface */
+    public function serialize() {
+        return serialize(array(
+            $this->id,
+            $this->email,
+            $this->firstName,
+            $this->lastName,
+            $this->groups
+        ));
+    }
+    public function unserialize($data) {
+        list(
+            $this->id,
+            $this->email,
+            $this->firstName,
+            $this->lastName,
+            $this->groups
+        ) = unserialize($data);
     }
 }

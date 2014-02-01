@@ -5,3 +5,14 @@ services:
 #    tn_group.example:
 #        class: %tn_group.example.class%
 #        arguments: [@service_id, "plain_value", %parameter%]
+    tnuser.security.authentication.provider:
+        class:  Videl\TNGroupBundle\Security\Authentication\Provider\TNUserProvider
+        arguments: ["", "%kernel.cache_dir%/security/nonces", "@doctrine.orm.entity_manager", "@logger"]
+        tags:
+            - { name: monolog.logger, channel: videl }
+
+    tnuser.security.authentication.listener:
+        class:  Videl\TNGroupBundle\Security\Firewall\TNUserListener
+        arguments: ["@security.context", "@security.authentication.manager", "@logger"]
+        tags:
+            - { name: monolog.logger, channel: videl }

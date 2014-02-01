@@ -21,3 +21,6 @@ tnancy_login:
 
 tnancy_login_check:
     path:   /login_check
+
+tnancy_logout:
+    path:   /logout
