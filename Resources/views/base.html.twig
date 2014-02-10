@@ -53,6 +53,26 @@
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
 						{% if is_granted('ROLE_TNANCY') %}
+							{# 
+							<li>
+								<a>{{ app.session.get('default_club', 'coucou') }}</a>
+							</li>
+							#}
+							<li><a>
+									<form id="club-switcher" action="{{ path('tn_group_club_switcher') }}" method="POST">
+										<select>
+											<option value="Vos clubs">Vos clubs</option>
+											{% for group in app.user.groups %}
+												{% if app.session.get('default_club') == group %}
+													<option value="{{ group }}">>>> {{ group }} <<<</option>
+												{% else %}
+													<option value="{{ group }}">{{ group }}</option>
+												{% endif %}
+											{% endfor %}
+										</select>
+									</form>
+								</a>
+							</li>
 							<li>
 								<a href="{{ url('tnancy_logout') }}">{{ app.user.username }}</a>
 							</li>

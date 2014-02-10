@@ -2,6 +2,11 @@ tn_group_homepage:
     pattern:  /
     defaults: { _controller: TNGroupBundle:Default:index }
 
+tn_group_club_switcher:
+    pattern:    /switch/club
+    defaults: { _controller: TNGroupBundle:Default:switchClub }
+    requirements: { _method: post }
+
 TNGroupBundle_parameter:
     resource: "@TNGroupBundle/Resources/config/routing/parameter.yml"
     prefix:   /parameter
